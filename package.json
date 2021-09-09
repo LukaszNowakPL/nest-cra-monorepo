@@ -1,0 +1,14 @@
+{
+  "name": "nest-cra-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "author": "https://github.com/LukaszNowakPL",
+  "description": "Trainint project for using monorepo with create react app and nest frameworks.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
