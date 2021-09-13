@@ -1,9 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import {config} from "dotenv";
 
 async function bootstrap() {
+    config({path: './../../.env'});
   const app = await NestFactory.create(AppModule);
-  // Być może warto ustawić 7000 w zmiennej środowiskowej projektu
-  await app.listen(7000);
+  await app.listen(process.env.BFF_PORT);
+
 }
 bootstrap();

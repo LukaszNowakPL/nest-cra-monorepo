@@ -10,9 +10,8 @@ export class CountriesService {
   constructor(private httpService: HttpService) {}
 
   findAirportsByCountry(id: number): Observable<AxiosResponse<AirportDto[]>> {
-    // @ToDo: ustawić porty i localhost w jakieś env
     return this.httpService
-      .get(`http://localhost:13000/api/airports/country/${id}`)
+      .get(`/airports/country/${id}`)
       .pipe(map(response => response.data));
   }
 }
