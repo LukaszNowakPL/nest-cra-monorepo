@@ -1,0 +1,66 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/services/src",
+  "monorepo": true,
+  "root": "apps/services",
+  "compilerOptions": {
+    "webpack": true,
+    "tsConfigPath": "apps/services/tsconfig.app.json"
+  },
+  "projects": {
+    "services": {
+      "type": "application",
+      "root": "apps/services",
+      "entryFile": "main",
+      "sourceRoot": "apps/services/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/services/tsconfig.app.json"
+      }
+    },
+    "airlines": {
+      "type": "application",
+      "root": "apps/airlines",
+      "entryFile": "main",
+      "sourceRoot": "apps/airlines/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/airlines/tsconfig.app.json"
+      }
+    },
+    "countries": {
+      "type": "application",
+      "root": "apps/countries",
+      "entryFile": "main",
+      "sourceRoot": "apps/countries/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/countries/tsconfig.app.json"
+      }
+    },
+    "airports": {
+      "type": "application",
+      "root": "apps/airports",
+      "entryFile": "main",
+      "sourceRoot": "apps/airports/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/airports/tsconfig.app.json"
+      }
+    },
+    "ils": {
+      "type": "application",
+      "root": "apps/ils",
+      "entryFile": "main",
+      "sourceRoot": "apps/ils/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/ils/tsconfig.app.json"
+      }
+    },
+    "pax-services": {
+      "type": "application",
+      "root": "apps/pax-services",
+      "entryFile": "main",
+      "sourceRoot": "apps/pax-services/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/pax-services/tsconfig.app.json"
+      }
+    }
+  }
+}
