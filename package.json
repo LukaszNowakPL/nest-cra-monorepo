@@ -4,7 +4,7 @@
   "private": true,
   "license": "MIT",
   "author": "https://github.com/LukaszNowakPL",
-  "description": "Trainint project for using monorepo with create react app and nest frameworks. ",
+  "description": "Trainint project for using monorepo with create react app and nest frameworks.  ",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
