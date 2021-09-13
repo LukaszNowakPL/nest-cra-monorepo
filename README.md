@@ -2,7 +2,7 @@
 [![Version](https://img.shields.io/github/package-json/v/LukaszNowakPL/nest-cra-monorepo)](https://github.com/LukaszNowakPL/nest-cra-monorepo/blob/master/package.json)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-#nest-cra-monorepo
+# nest-cra-monorepo
 
 This is a training application for:
 - using Backend for frontend architectural pattern (BFF)
@@ -12,6 +12,8 @@ This is a training application for:
 # Architecture schema
 
 The frontend application is a SPA based on Create React App. The application communicates with it's dedicated BFF component which is based on Nest.js framework. The aim of BFF layer is to further proxy requests and map it's responses to the shape, the frontend application should not need to remap anymore. The BFF communicates with series of smaller services. They also are based on Nest.js framework and have strictly narrowed domain (i.e. each service for airports, airlines and countries).
+
+![Architecture schema](readme-img/architectural-schema.png)
 
 # Starting applications
 
