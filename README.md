@@ -94,7 +94,6 @@ Technologies and patterns used:
 The frontend application is forked from [cypress-integration-test](https://github.com/LukaszNowakPL/cypress-integration-tests). The aim of that project was to compare writing integration tests using `Jest`/`testing-library`, `cypress` and `playwright` stacks. The application was basis for such testings.
 
 # Known issues
-
-- BFF component performs validation on `POST` `api/airports` endpoint. Such validation should take place on `airports` service or some other dedicated service. 
+ 
 - Frontend and Nest components testing
 - When some service makes several http calls it might use Promise.all

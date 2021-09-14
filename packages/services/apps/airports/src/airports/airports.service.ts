@@ -1,9 +1,26 @@
 import { Injectable } from '@nestjs/common';
-import { AirportDto, AirportForm, ILS } from './airports.types';
-import { remapAirportForm } from './airports.helpers';
+import { AirportDto, AirportForm } from './airports.types';
+import { remapAirportForm, validateAirport } from './airports.helpers';
+import { CountriesService } from '../services/countries.service';
+import { Observable } from 'rxjs';
+import { AxiosResponse } from 'axios';
+import { CountryDto } from '../services/countries.types';
+import { AirlinesService } from '../services/airlines.service';
+import { IlsService } from '../services/ils.service';
+import { PaxServicesService } from '../services/paxServices.service';
+import { AirlineDto } from '../services/airlines.types';
+import { IlsDto, ILS } from '../services/ils.types';
+import { PaxServiceDto } from '../services/paxServices.types';
 
 @Injectable()
 export class AirportsService {
+  constructor(
+    private countriesService: CountriesService,
+    private airlinesService: AirlinesService,
+    private ilsService: IlsService,
+    private paxServicesService: PaxServicesService,
+  ) {}
+
   private readonly airports: AirportDto[] = [
     {
       id: 1,
@@ -202,8 +219,43 @@ export class AirportsService {
     return this.airports.filter(airportItem => airportItem.country_id === id);
   }
 
-  create(airportForm: AirportForm): void {
-    const airport = remapAirportForm(airportForm, this.airports.length);
-    this.airports.push(airport);
+  private getCountries(): Observable<AxiosResponse<CountryDto[]>> {
+    return this.countriesService.getAll();
+  }
+
+  private getAirlines(): Observable<AxiosResponse<AirlineDto[]>> {
+    return this.airlinesService.getAll();
+  }
+
+  private getIls(): Observable<AxiosResponse<IlsDto[]>> {
+    return this.ilsService.getAll();
+  }
+
+  private getPaxServices(): Observable<AxiosResponse<PaxServiceDto[]>> {
+    return this.paxServicesService.getAll();
+  }
+
+  async create(airportForm: AirportForm) {
+    const countries = ((await this.getCountries().toPromise()) as unknown) as CountryDto[];
+    const airports = this.findAll();
+    const airlines = ((await this.getAirlines().toPromise()) as unknown) as AirlineDto[];
+    const ils = ((await this.getIls().toPromise()) as unknown) as IlsDto[];
+    const paxServices = ((await this.getPaxServices().toPromise()) as unknown) as PaxServiceDto[];
+
+    if (
+      validateAirport({
+        airportForm,
+        countries,
+        airports,
+        airlines,
+        ils,
+        paxServices,
+      })
+    ) {
+      const airport = remapAirportForm(airportForm, this.airports.length);
+      this.airports.push(airport);
+    } else {
+      throw new Error('Airport data validation error');
+    }
   }
 }

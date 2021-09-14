@@ -36,19 +36,19 @@ export class DictionariesService {
         });
     }
 
-  getCountries(): Observable<AxiosResponse<CountryDto[]>> {
+  private getCountries(): Observable<AxiosResponse<CountryDto[]>> {
       return this.countriesService.getAll()
   }
 
-  getAirlines(): Observable<AxiosResponse<AirlineDto[]>> {
+  private getAirlines(): Observable<AxiosResponse<AirlineDto[]>> {
       return this.airlinesService.getAll()
   }
 
-  getIls(): Observable<AxiosResponse<IlsDto[]>> {
+  private getIls(): Observable<AxiosResponse<IlsDto[]>> {
       return this.ilsService.getAll()
   }
 
-  getPaxServices(): Observable<AxiosResponse<PaxServiceDto[]>> {
+  private getPaxServices(): Observable<AxiosResponse<PaxServiceDto[]>> {
       return this.paxServicesService.getAll()
   }
 }
