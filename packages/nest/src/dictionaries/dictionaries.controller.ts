@@ -2,18 +2,17 @@ import { Controller, Get } from '@nestjs/common';
 import { DictionariesService } from './dictionaries.service';
 import { DictionariesDto } from '@nest-cra-monorepo/types';
 import { getMappedDictionary } from './dictionaries.helpers';
-import {
-  AirlineDto,
-  CountryDto,
-  IlsDto,
-  PaxServiceDto,
-} from './dictionaries.types';
+import {CountryDto} from "../services/countries.types";
+import {AirlineDto} from "../services/airlines.types";
+import {IlsDto} from "../services/ils.types";
+import {PaxServiceDto} from '../services/paxServices.types';
 
 @Controller('api/dictionaries')
 export class DictionariesController {
   constructor(private readonly dictionariesService: DictionariesService) {}
 
   //@ToDo: pewnie jakiś promise all
+  // @ToDo: przerzucić logikę do serwisu
   @Get()
   async index(): Promise<DictionariesDto> {
     const countries = await this.dictionariesService.getCountries().toPromise();

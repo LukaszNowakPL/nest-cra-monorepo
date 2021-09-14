@@ -1,10 +1,8 @@
 import { DictionariesDto } from '@nest-cra-monorepo/types';
-import {
-  AirlineDto,
-  CountryDto,
-  IlsDto,
-  PaxServiceDto,
-} from './dictionaries.types';
+import {CountryDto} from "../services/countries.types";
+import {AirlineDto} from "../services/airlines.types";
+import {IlsDto} from "../services/ils.types";
+import {PaxServiceDto} from "../services/paxServices.types";
 
 export const getMappedDictionary = ({
   countries,
