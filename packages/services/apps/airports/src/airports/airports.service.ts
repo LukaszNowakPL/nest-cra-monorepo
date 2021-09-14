@@ -242,20 +242,16 @@ export class AirportsService {
     const ils = ((await this.getIls().toPromise()) as unknown) as IlsDto[];
     const paxServices = ((await this.getPaxServices().toPromise()) as unknown) as PaxServiceDto[];
 
-    if (
-      validateAirport({
-        airportForm,
-        countries,
-        airports,
-        airlines,
-        ils,
-        paxServices,
-      })
-    ) {
-      const airport = remapAirportForm(airportForm, this.airports.length);
-      this.airports.push(airport);
-    } else {
-      throw new Error('Airport data validation error');
-    }
+    validateAirport({
+      airportForm,
+      countries,
+      airports,
+      airlines,
+      ils,
+      paxServices,
+    });
+
+    const airport = remapAirportForm(airportForm, this.airports.length);
+    this.airports.push(airport);
   }
 }

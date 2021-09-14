@@ -30,12 +30,10 @@ export const validateAirport = ({
   ils,
   paxServices,
 }: ValidateAirportArgs): boolean => {
-  // @ToDo: Maybe throw error on every false?
-
   // Country
   // If exists on service
   if (countries.find(country => country.id === countryId) === undefined) {
-    return false;
+    throwError(`country_id ${countryId} is not found on service`);
   }
 
   // City
@@ -47,41 +45,41 @@ export const validateAirport = ({
         Number(airport.country_id) === Number(countryId),
     ) !== undefined
   ) {
-    return false;
+    throwError(`name ${name} is not unique in selected country ${countryId}`);
   }
 
   // Iata
   // If 3 uppercase chars
   if (!/\b([A-Z]{3})\b/.test(iata)) {
-    return false;
+    throwError(`iata ${iata} is not 3 uppercase chars`);
   }
   // If unique
   if (airports.find(airport => airport.iata === iata) !== undefined) {
-    return false;
+    throwError(`iata '${iata}' is not unique in service`);
   }
 
   // Pax amount
-  // @ToDo: Maybe numericPaxAmount = Number(paxAmount) ?
+  const numericPaxAmount = Number(paxAmount);
   // If numeric
-  if (paxAmount !== String(Number(paxAmount))) {
-    return false;
+  if (paxAmount !== String(numericPaxAmount)) {
+    throwError(`pax_amount ${paxAmount} is not numeric`);
   }
   // If greater than 0
-  if (Number(paxAmount) <= 0) {
-    return false;
+  if (numericPaxAmount <= 0) {
+    throwError(`pax_amount ${paxAmount} is not greater than 0`);
   }
   // If full number
   if (
-    Number(paxAmount) !== Math.floor(Number(paxAmount)) ||
-    Number(paxAmount) !== Math.ceil(Number(paxAmount))
+    numericPaxAmount !== Math.floor(numericPaxAmount) ||
+    numericPaxAmount !== Math.ceil(numericPaxAmount)
   ) {
-    return false;
+    throwError(`pax_amount ${paxAmount} is fraction number`);
   }
 
   // Airlines
   // At least one is selected
   if (selectedAirlines.length === 0) {
-    return false;
+    throwError(`no airline is selected`);
   }
   // If each airline exists on service
   if (
@@ -90,27 +88,37 @@ export const validateAirport = ({
         airlines.find(airline => airline.id === selectedAirline) === undefined,
     )
   ) {
-    return false;
+    throwError(
+      `airlines ${JSON.stringify(
+        selectedAirlines.filter(
+          selectedAirline =>
+            airlines.find(airline => airline.id === selectedAirline) ===
+            undefined,
+        ),
+      )} not found on service`,
+    );
   }
 
   // Average delay
-  // @ToDo: Maybe numericAverageDelay = Number(averageDelay) ?
+  const numericAverageDelay = Number(averageDelay);
   // If numeric
-  if (averageDelay !== String(Number(averageDelay))) {
-    return false;
+  if (averageDelay !== String(numericAverageDelay)) {
+    throwError(`average_delay ${averageDelay} is not numeric`);
   }
   // If decimal scale < 3
   if (
-    Number(averageDelay) * 100 !== Math.floor(Number(averageDelay)) * 100 ||
-    Number(averageDelay) * 100 !== Math.ceil(Number(averageDelay)) * 100
+    numericAverageDelay * 100 !== Math.floor(numericAverageDelay) * 100 ||
+    numericAverageDelay * 100 !== Math.ceil(numericAverageDelay) * 100
   ) {
-    return false;
+    throwError(
+      `average_delay ${averageDelay} is fraction of more than 2 digits`,
+    );
   }
 
   // Ils
   // If exists on service
   if (ils.find(ils => ils.id === ilsEquipment) === undefined) {
-    return false;
+    throwError(`ils ${ils} not found on a service`);
   }
 
   // Pax Services
@@ -122,10 +130,20 @@ export const validateAirport = ({
         undefined,
     )
   ) {
-    return false;
+    throwError(
+      `pax_service ${services.filter(
+        service =>
+          paxServices.find(paxService => service === paxService.name) ===
+          undefined,
+      )} not found on a service`,
+    );
   }
 
   return true;
+};
+
+const throwError = (errorDetails: string) => {
+  throw new Error(`POST /api/airports Body validation failed: ${errorDetails}`);
 };
 
 export const remapAirportForm = (

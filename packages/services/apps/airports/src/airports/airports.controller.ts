@@ -17,7 +17,7 @@ export class AirportsController {
   }
 
   @Post()
-  create(@Body() airportForm: AirportForm): void {
-    this.airportsService.create(airportForm);
+  async create(@Body() airportForm: AirportForm): Promise<void> {
+    return this.airportsService.create(airportForm);
   }
 }

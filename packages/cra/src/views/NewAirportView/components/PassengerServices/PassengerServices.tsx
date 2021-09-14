@@ -29,7 +29,7 @@ export const PassengerServices: React.FC = () => {
             <CheckboxGroup value={field.value} onChange={handleChange} isDisabled={isFieldDisabled}>
                 <Stack>
                     {data?.pax_services.map(service => (
-                        <Checkbox key={service.id} value={service.name}>
+                        <Checkbox key={service.id} value={service.id}>
                             {service.name}
                         </Checkbox>
                     ))}
