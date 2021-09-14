@@ -1,4 +1,4 @@
-enum PAX_SERVICE {
+export enum PAX_SERVICE {
     FASTTRACK = 'fasttrack',
     BOARDING_KIOSKS = 'boarding_kiosks',
     PUBLIC_TRANSPORT = 'public_transport',

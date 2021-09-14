@@ -1,4 +1,4 @@
-enum ILS {
+export enum ILS {
     NONE = 'none',
     CATI_SINGLE = 'cat1_single',
     CATI_BOTH = 'cat1_both',
