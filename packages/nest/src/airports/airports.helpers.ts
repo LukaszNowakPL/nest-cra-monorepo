@@ -1,11 +1,9 @@
 import { AirportForm } from '@nest-cra-monorepo/types';
-import {
-  CountryDto,
-  AirportDto,
-  AirlineDto,
-  IlsDto,
-  PaxServiceDto,
-} from './airports.types';
+import {CountryDto} from '../services/countries.types';
+import {AirportDto} from "../services/airports.types";
+import {AirlineDto} from '../services/airlines.types';
+import {IlsDto} from "../services/ils.types";
+import {PaxServiceDto} from "../services/paxServices.types";
 
 interface ValidateAirportArgs {
   airportForm: AirportForm;
