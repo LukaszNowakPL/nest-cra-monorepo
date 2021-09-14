@@ -98,5 +98,3 @@ The frontend application is forked from [cypress-integration-test](https://githu
 - BFF component performs validation on `POST` `api/airports` endpoint. Such validation should take place on `airports` service or some other dedicated service. 
 - Frontend and Nest components testing
 - When some service makes several http calls it might use Promise.all
-- Dictionary module of BFF component - there is a mapping performed on controller. It probable should happen on service
-- `localhost:port` should probable be stored on some config/envs 
