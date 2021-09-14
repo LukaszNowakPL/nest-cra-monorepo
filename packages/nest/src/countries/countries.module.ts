@@ -1,14 +1,10 @@
 import { Module } from '@nestjs/common';
-import { HttpModule } from '@nestjs/axios';
 import { CountriesService } from './countries.service';
 import { CountriesController } from './countries.controller';
-import {config} from "dotenv";
+import {ServicesModule} from "../services/services.module";
 
-config({path: './../../.env'});
 @Module({
-  imports: [HttpModule.register({
-      baseURL: `${process.env.AIRPORTS_SERVICE_URL}:${process.env.AIRPORTS_SERVICE_PORT}/api`
-  })],
+  imports: [ServicesModule],
   providers: [CountriesService],
   controllers: [CountriesController],
 })

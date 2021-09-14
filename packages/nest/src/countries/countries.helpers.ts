@@ -1,5 +1,5 @@
 import { CountryAirportDto } from '@nest-cra-monorepo/types';
-import { AirportDto } from './countries.types';
+import {AirportDto} from '../services/airports.types';
 
 export const getMappedAirports = (
   airports: AirportDto[],
